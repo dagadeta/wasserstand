@@ -4,8 +4,136 @@
         <meta charset="UTF-8">
         <title>Water level</title>
         <link rel="icon" type="image/x-icon" href="images/favicon.png">
-        <link rel="stylesheet" href="style.css">
-        <script src="code.js"></script>
+        <style>
+            body {
+                background-color: #1a1a1a;
+                color: white;
+                font-family: Bahnschrift, serif;
+            }
+
+            #logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            h1 {
+                margin-left: 10px;
+            }
+
+            .waterdiv {
+                width: 500px;
+                height: 100px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            #waterdiv5 {
+                background-color: grey;
+                border-radius: 15px 15px 5px 5px;
+            }
+
+            #waterdiv4 {
+                background-color: grey;
+                border-radius: 5px;
+            }
+
+            #waterdiv3 {
+                background-color: grey;
+                border-radius: 5px;
+            }
+
+            #waterdiv2 {
+                background-color: grey;
+                border-radius: 5px;
+            }
+
+            #waterdiv1 {
+                background-color: grey;
+                border-radius: 5px 5px 15px 15px;
+            }
+
+            #legendtable {
+                width: 500px;
+                background-color: #343434;
+                border-radius: 15px;
+                text-align: center;
+            }
+
+            .legendtd {
+                width: 250px;
+            }
+
+            .legend {
+                width: 240px;
+                height: 50px;
+                margin-right: 5px;
+                margin-left: 5px;
+                text-align: center;
+                vertical-align: center;
+            }
+
+            #tiwater {
+                margin-top: 5px;
+                border-radius: 15px 15px 5px 5px;
+                background-color: royalblue;
+            }
+
+            #tinowater {
+                border-radius: 5px;
+                background-color: lightslategrey;
+            }
+
+            #tinodata {
+                margin-bottom: 5px;
+                border-radius: 5px 5px 15px 15px;
+                background-color: grey;
+            }
+        </style>
+        <script>
+            function main() {
+                let waterdiv1 = document.getElementById("waterdiv1");
+                let waterdiv2 = document.getElementById("waterdiv2");
+                let waterdiv3 = document.getElementById("waterdiv3");
+                let waterdiv4 = document.getElementById("waterdiv4");
+                let waterdiv5 = document.getElementById("waterdiv5");
+
+                let water1 = true;
+                let water2 = true;
+                let water3 = true;
+                let water4 = false;
+                let water5 = false;
+
+                if (water1 === true) {
+                    waterdiv1.style.backgroundColor = "royalblue";
+                } else {
+                    waterdiv1.style.backgroundColor = "lightslategrey";
+                }
+                if (water2 === true) {
+                    waterdiv2.style.backgroundColor = "royalblue";
+                } else {
+                    waterdiv2.style.backgroundColor = "lightslategrey";
+                }
+                if (water3 === true) {
+                    waterdiv3.style.backgroundColor = "royalblue";
+                } else {
+                    waterdiv3.style.backgroundColor = "lightslategrey";
+                }
+                if (water4 === true) {
+                    waterdiv4.style.backgroundColor = "royalblue";
+                } else {
+                    waterdiv4.style.backgroundColor = "lightslategrey";
+                }
+                if (water5 === true) {
+                    waterdiv5.style.backgroundColor = "royalblue";
+                } else {
+                    waterdiv5.style.backgroundColor = "lightslategrey";
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', (event) => {
+                main()
+            })
+        </script>
     </head>
     <body>
     <table>
