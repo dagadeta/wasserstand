@@ -3,9 +3,8 @@ import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 GPIO.setmode(GPIO.BCM)
-clear = lambda: os.system("clear")
 
-hostName = "localhost"
+hostName = ""
 serverPort = 8080
 
 sensor_5 = 5
@@ -36,7 +35,7 @@ class MyServer(BaseHTTPRequestHandler):
         self.wfile.write(bytes("\"sensor_3\": %r," % (GPIO.input(sensor_3) == GPIO.LOW), "utf-8"))
         self.wfile.write(bytes("\"sensor_2\": %r," % (GPIO.input(sensor_2) == GPIO.LOW), "utf-8"))
         self.wfile.write(bytes("\"sensor_1\": %r" % (GPIO.input(sensor_1) == GPIO.LOW), "utf-8"))
-        self.wfile.write(bytes("}", "utf-8"))
+        self.wfile.write(bytes("}\n", "utf-8"))
 
 
 if __name__ == "__main__":
