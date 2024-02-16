@@ -1,9 +1,12 @@
 import RPi.GPIO as GPIO
-import time
 import os
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 GPIO.setmode(GPIO.BCM)
 clear = lambda: os.system("clear")
+
+hostName = "localhost"
+serverPort = 8080
 
 sensor_5 = 5
 GPIO.setup(sensor_5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -16,30 +19,35 @@ GPIO.setup(sensor_2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 sensor_1 = 26
 GPIO.setup(sensor_1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-try:
-    while True:
-        clear()
-        if GPIO.input(sensor_5) == GPIO.LOW:
-            print("sensor_5: Strom fließt")
-        else:
-            print("sensor_5: Kein Strom")
-        if GPIO.input(sensor_4) == GPIO.LOW:
-            print("sensor_4: Strom fließt")
-        else:
-            print("sensor_4: Kein Strom")
-        if GPIO.input(sensor_3) == GPIO.LOW:
-            print("sensor_3: Strom fließt")
-        else:
-            print("sensor_3: Kein Strom")
-        if GPIO.input(sensor_2) == GPIO.LOW:
-            print("sensor_2: Strom fließt")
-        else:
-            print("sensor_2: Kein Strom")
-        if GPIO.input(sensor_1) == GPIO.LOW:
-            print("sensor_1: Strom fließt")
-        else:
-            print("sensor_1: Kein Strom")
-        time.sleep(1)
 
-except KeyboardInterrupt:
+class MyServer(BaseHTTPRequestHandler):
+    def do_GET(self):
+        if self.path != "/check-water":
+            self.send_response(404)
+            self.end_headers()
+            return
+
+        self.send_response(200)
+        self.send_header("Content-type", "application/json")
+        self.end_headers()
+        self.wfile.write(bytes("{", "utf-8"))
+        self.wfile.write(bytes("\"sensor_5\": %r," % (GPIO.input(sensor_5) == GPIO.LOW), "utf-8"))
+        self.wfile.write(bytes("\"sensor_4\": %r," % (GPIO.input(sensor_4) == GPIO.LOW), "utf-8"))
+        self.wfile.write(bytes("\"sensor_3\": %r," % (GPIO.input(sensor_3) == GPIO.LOW), "utf-8"))
+        self.wfile.write(bytes("\"sensor_2\": %r," % (GPIO.input(sensor_2) == GPIO.LOW), "utf-8"))
+        self.wfile.write(bytes("\"sensor_1\": %r" % (GPIO.input(sensor_1) == GPIO.LOW), "utf-8"))
+        self.wfile.write(bytes("}", "utf-8"))
+
+
+if __name__ == "__main__":
+    webServer = HTTPServer((hostName, serverPort), MyServer)
+    print("Server started http://%s:%s" % (hostName, serverPort))
+
+    try:
+        webServer.serve_forever()
+    except KeyboardInterrupt:
+        pass
+
+    webServer.server_close()
     GPIO.cleanup()
+    print("Server stopped.")
