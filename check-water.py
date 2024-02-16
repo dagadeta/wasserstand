@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 GPIO.setmode(GPIO.BCM)
