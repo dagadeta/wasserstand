@@ -97,35 +97,35 @@
                 let waterdiv4 = document.getElementById("waterdiv4");
                 let waterdiv5 = document.getElementById("waterdiv5");
 
-                let water1 = true;
-                let water2 = true;
-                let water3 = true;
-                let water4 = false;
-                let water5 = false;
+                let water1
+                let water2
+                let water3
+                let water4
+                let water5
 
                 if (water1 === true) {
                     waterdiv1.style.backgroundColor = "royalblue";
-                } else {
+                } else if (water1 === false) {
                     waterdiv1.style.backgroundColor = "lightslategrey";
                 }
                 if (water2 === true) {
                     waterdiv2.style.backgroundColor = "royalblue";
-                } else {
+                } else if (water2 === false) {
                     waterdiv2.style.backgroundColor = "lightslategrey";
                 }
                 if (water3 === true) {
                     waterdiv3.style.backgroundColor = "royalblue";
-                } else {
+                } else if (water3 === false) {
                     waterdiv3.style.backgroundColor = "lightslategrey";
                 }
                 if (water4 === true) {
                     waterdiv4.style.backgroundColor = "royalblue";
-                } else {
+                } else if (water4 === false) {
                     waterdiv4.style.backgroundColor = "lightslategrey";
                 }
                 if (water5 === true) {
                     waterdiv5.style.backgroundColor = "royalblue";
-                } else {
+                } else if (water5 === false) {
                     waterdiv5.style.backgroundColor = "lightslategrey";
                 }
             }
