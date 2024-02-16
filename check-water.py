@@ -6,15 +6,15 @@ GPIO.setmode(GPIO.BCM)
 clear = lambda: os.system("clear")
 
 sensor_5 = 5
-GPIO.setup(sensor_5, GPIO.IN)
+GPIO.setup(sensor_5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 sensor_4 = 6
-GPIO.setup(sensor_4, GPIO.IN)
+GPIO.setup(sensor_4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 sensor_3 = 13
-GPIO.setup(sensor_3, GPIO.IN)
+GPIO.setup(sensor_3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 sensor_2 = 19
-GPIO.setup(sensor_2, GPIO.IN)
+GPIO.setup(sensor_2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 sensor_1 = 26
-GPIO.setup(sensor_1, GPIO.IN)
+GPIO.setup(sensor_1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 try:
     while True:
