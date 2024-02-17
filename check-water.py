@@ -27,14 +27,19 @@ class MyServer(BaseHTTPRequestHandler):
 
         self.send_response(200)
         self.send_header("Content-type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
         self.wfile.write(bytes("{", "utf-8"))
-        self.wfile.write(bytes("\"sensor_5\": %r," % (GPIO.input(sensor_5) == GPIO.LOW), "utf-8"))
-        self.wfile.write(bytes("\"sensor_4\": %r," % (GPIO.input(sensor_4) == GPIO.LOW), "utf-8"))
-        self.wfile.write(bytes("\"sensor_3\": %r," % (GPIO.input(sensor_3) == GPIO.LOW), "utf-8"))
-        self.wfile.write(bytes("\"sensor_2\": %r," % (GPIO.input(sensor_2) == GPIO.LOW), "utf-8"))
-        self.wfile.write(bytes("\"sensor_1\": %r" % (GPIO.input(sensor_1) == GPIO.LOW), "utf-8"))
+        self.wfile.write(bytes("\"sensor_5\": %s," % (self.is_low(sensor_5)), "utf-8"))
+        self.wfile.write(bytes("\"sensor_4\": %s," % (self.is_low(sensor_4)), "utf-8"))
+        self.wfile.write(bytes("\"sensor_3\": %s," % (self.is_low(sensor_3)), "utf-8"))
+        self.wfile.write(bytes("\"sensor_2\": %s," % (self.is_low(sensor_2)), "utf-8"))
+        self.wfile.write(bytes("\"sensor_1\": %s" % (self.is_low(sensor_1)), "utf-8"))
         self.wfile.write(bytes("}\n", "utf-8"))
+
+    def is_low(self, sensor):
+        is_low = GPIO.input(sensor) == GPIO.LOW
+        return f"{is_low}".lower()
 
 
 if __name__ == "__main__":
