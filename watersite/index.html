@@ -90,48 +90,49 @@
             }
         </style>
         <script>
-            function main() {
+            async function check_water() {
+                await fetch('http://raspberrypi:8080/check-water')
+                    .then((response) => response.json())
+                    .then((json) => set_colors(json));
+            }
+
+            function set_colors(water) {
                 let waterdiv1 = document.getElementById("waterdiv1");
                 let waterdiv2 = document.getElementById("waterdiv2");
                 let waterdiv3 = document.getElementById("waterdiv3");
                 let waterdiv4 = document.getElementById("waterdiv4");
                 let waterdiv5 = document.getElementById("waterdiv5");
 
-                let water1;
-                let water2;
-                let water3;
-                let water4;
-                let water5;
-
-                if (water1 === true) {
+                if (water.sensor_1 === true) {
                     waterdiv1.style.backgroundColor = "royalblue";
-                } else if (water1 === false) {
+                } else if (water.sensor_1 === false) {
                     waterdiv1.style.backgroundColor = "lightslategrey";
                 }
-                if (water2 === true) {
+                if (water.sensor_2 === true) {
                     waterdiv2.style.backgroundColor = "royalblue";
-                } else if (water2 === false) {
+                } else if (water.sensor_2 === false) {
                     waterdiv2.style.backgroundColor = "lightslategrey";
                 }
-                if (water3 === true) {
+                if (water.sensor_3 === true) {
                     waterdiv3.style.backgroundColor = "royalblue";
-                } else if (water3 === false) {
+                } else if (water.sensor_3 === false) {
                     waterdiv3.style.backgroundColor = "lightslategrey";
                 }
-                if (water4 === true) {
+                if (water.sensor_4 === true) {
                     waterdiv4.style.backgroundColor = "royalblue";
-                } else if (water4 === false) {
+                } else if (water.sensor_4 === false) {
                     waterdiv4.style.backgroundColor = "lightslategrey";
                 }
-                if (water5 === true) {
+                if (water.sensor_5 === true) {
                     waterdiv5.style.backgroundColor = "royalblue";
-                } else if (water5 === false) {
+                } else if (water.sensor_5 === false) {
                     waterdiv5.style.backgroundColor = "lightslategrey";
                 }
             }
 
             document.addEventListener('DOMContentLoaded', (event) => {
-                main()
+                check_water()
+                setInterval(check_water, 5000)
             })
         </script>
     </head>
