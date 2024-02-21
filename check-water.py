@@ -6,16 +6,13 @@ GPIO.setmode(GPIO.BCM)
 hostName = ""
 serverPort = 8080
 
-sensor_5 = 5
-GPIO.setup(sensor_5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-sensor_4 = 6
-GPIO.setup(sensor_4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-sensor_3 = 13
-GPIO.setup(sensor_3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-sensor_2 = 19
-GPIO.setup(sensor_2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-sensor_1 = 26
-GPIO.setup(sensor_1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+# Define sensor pin numbers
+sensor_pins = [5, 6, 13, 19, 26]
+
+# Set up each sensor using a for loop
+for i, sensor_pin in enumerate(sensor_pins, start=1):
+    exec(f"sensor_{6 - i} = {sensor_pin}")
+    GPIO.setup(sensor_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
 class MyServer(BaseHTTPRequestHandler):
