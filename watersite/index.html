@@ -4,11 +4,40 @@
         <meta charset="UTF-8">
         <title>Water level</title>
         <link rel="icon" type="image/x-icon" href="images/favicon.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
         <style>
             body {
-                background-color: #1a1a1a;
+                background-color: #000a22;
                 color: white;
-                font-family: Bahnschrift, serif;
+                font-family: "Roboto Flex", serif;
+                font-optical-sizing: auto;
+                font-weight: normal;
+                font-style: normal;
+                font-size: 3vmin;
+                font-variation-settings:
+                        "slnt" 0,
+                        "wdth" 100,
+                        "GRAD" 0,
+                        "XOPQ" 96,
+                        "XTRA" 468,
+                        "YOPQ" 79,
+                        "YTAS" 750,
+                        "YTDE" -203,
+                        "YTFI" 738,
+                        "YTLC" 514,
+                        "YTUC" 712;
+            }
+
+            #header {
+                width: auto;
+                max-width: 90%;
+                background-color: #0b1639;
+                border-radius: 20px;
+                text-align: center;
+                margin: 2vmin auto;
+                padding: 2vmin;
             }
 
             #logo {
@@ -18,72 +47,78 @@
 
             h1 {
                 margin-left: 10px;
+                font-size: 4vmin;
+                font-weight: bold;
             }
 
-            .waterdiv {
-                width: 500px;
+            .waterDiv {
+                width: 90%;
+                max-width: 1000px;
                 height: 100px;
-                margin-top: 5px;
-                margin-bottom: 5px;
+                margin: 5px auto;
             }
 
-            #waterdiv5 {
+            #waterDiv5 {
                 background-color: darkred;
-                border-radius: 15px 15px 5px 5px;
+                border-radius: 20px 20px 5px 5px;
             }
 
-            #waterdiv4 {
-                background-color: darkred;
-                border-radius: 5px;
-            }
-
-            #waterdiv3 {
+            #waterDiv4, #waterDiv3, #waterDiv2 {
                 background-color: darkred;
                 border-radius: 5px;
             }
 
-            #waterdiv2 {
+            #waterDiv1 {
                 background-color: darkred;
-                border-radius: 5px;
+                border-radius: 5px 5px 20px 20px;
             }
 
-            #waterdiv1 {
-                background-color: darkred;
-                border-radius: 5px 5px 15px 15px;
-            }
-
-            #legendtable {
-                width: 500px;
-                background-color: #343434;
-                border-radius: 15px;
+            #legendTable {
+                width: 90%;
+                max-width: 1000px;
+                background-color: #0b1639;
+                border-radius: 20px;
                 text-align: center;
+                margin: 2vmin auto;
             }
 
-            .legendtd {
-                width: 250px;
+            .legend_td, .legend_p_td {
+                width: 50%;
+                height: 100px;
+            }
+
+            .legend_p_tr {
+                width: 100%;
+                height: 100px;
+            }
+
+            .legend_p_table {
+                width: 100%;
             }
 
             .legend {
-                width: 240px;
-                height: 50px;
+                max-width: 100%;
+                height: 100px;
                 margin-right: 5px;
                 margin-left: 5px;
                 text-align: center;
                 vertical-align: center;
             }
 
-            #tiwater {
+            #ti_water {
                 margin-top: 5px;
+                margin-bottom: 5px;
                 border-radius: 15px 15px 5px 5px;
                 background-color: royalblue;
             }
 
-            #tinowater {
+            #ti_no_water {
                 border-radius: 5px;
                 background-color: lightslategrey;
             }
 
-            #tinodata {
+            #ti_no_data {
+                margin-top: 5px;
                 margin-bottom: 5px;
                 border-radius: 5px 5px 15px 15px;
                 background-color: darkred;
@@ -97,36 +132,36 @@
             }
 
             function set_colors(water) {
-                let waterdiv1 = document.getElementById("waterdiv1");
-                let waterdiv2 = document.getElementById("waterdiv2");
-                let waterdiv3 = document.getElementById("waterdiv3");
-                let waterdiv4 = document.getElementById("waterdiv4");
-                let waterdiv5 = document.getElementById("waterdiv5");
+                let waterDiv1 = document.getElementById("waterDiv1");
+                let waterDiv2 = document.getElementById("waterDiv2");
+                let waterDiv3 = document.getElementById("waterDiv3");
+                let waterDiv4 = document.getElementById("waterDiv4");
+                let waterDiv5 = document.getElementById("waterDiv5");
 
                 if (water.sensor_1 === true) {
-                    waterdiv1.style.backgroundColor = "royalblue";
+                    waterDiv1.style.backgroundColor = "royalblue";
                 } else if (water.sensor_1 === false) {
-                    waterdiv1.style.backgroundColor = "lightslategrey";
+                    waterDiv1.style.backgroundColor = "lightslategrey";
                 }
                 if (water.sensor_2 === true) {
-                    waterdiv2.style.backgroundColor = "royalblue";
+                    waterDiv2.style.backgroundColor = "royalblue";
                 } else if (water.sensor_2 === false) {
-                    waterdiv2.style.backgroundColor = "lightslategrey";
+                    waterDiv2.style.backgroundColor = "lightslategrey";
                 }
                 if (water.sensor_3 === true) {
-                    waterdiv3.style.backgroundColor = "royalblue";
+                    waterDiv3.style.backgroundColor = "royalblue";
                 } else if (water.sensor_3 === false) {
-                    waterdiv3.style.backgroundColor = "lightslategrey";
+                    waterDiv3.style.backgroundColor = "lightslategrey";
                 }
                 if (water.sensor_4 === true) {
-                    waterdiv4.style.backgroundColor = "royalblue";
+                    waterDiv4.style.backgroundColor = "royalblue";
                 } else if (water.sensor_4 === false) {
-                    waterdiv4.style.backgroundColor = "lightslategrey";
+                    waterDiv4.style.backgroundColor = "lightslategrey";
                 }
                 if (water.sensor_5 === true) {
-                    waterdiv5.style.backgroundColor = "royalblue";
+                    waterDiv5.style.backgroundColor = "royalblue";
                 } else if (water.sensor_5 === false) {
-                    waterdiv5.style.backgroundColor = "lightslategrey";
+                    waterDiv5.style.backgroundColor = "lightslategrey";
                 }
             }
 
@@ -137,42 +172,38 @@
         </script>
     </head>
     <body>
-    <table>
-        <tr>
-            <td>
-                <img id="logo" src="images/favicon.png" alt="logo">
-            </td>
-            <td><h1>Water level</h1></td>
-        </tr>
-    </table>
-        <div class="waterdiv" id="waterdiv5"></div>
-        <div class="waterdiv" id="waterdiv4"></div>
-        <div class="waterdiv" id="waterdiv3"></div>
-        <div class="waterdiv" id="waterdiv2"></div>
-        <div class="waterdiv" id="waterdiv1"></div>
-        <table id="legendtable">
+        <table id="header">
             <tr>
-                <td class="legendtd">
-                    <div class="legend" id="tiwater"></div>
-                </td>
                 <td>
-                    <p class="legendp">There is water</p>
+                    <img id="logo" src="images/favicon.png" alt="logo">
                 </td>
+                <td><h1>Water level</h1></td>
             </tr>
+        </table>
+        <div class="waterDiv" id="waterDiv5"></div>
+        <div class="waterDiv" id="waterDiv4"></div>
+        <div class="waterDiv" id="waterDiv3"></div>
+        <div class="waterDiv" id="waterDiv2"></div>
+        <div class="waterDiv" id="waterDiv1"></div>
+        <table id="legendTable">
             <tr>
-                <td class="legendtd">
-                    <div class="legend" id="tinowater"></div>
+                <td class="legend_td">
+                    <div class="legend" id="ti_water"></div>
+                    <div class="legend" id="ti_no_water"></div>
+                    <div class="legend" id="ti_no_data"></div>
                 </td>
-                <td>
-                    <p class="legendp">There is no water</p>
-                </td>
-            </tr>
-            <tr>
-                <td class="legendtd">
-                    <div class="legend" id="tinodata"></div>
-                </td>
-                <td>
-                    <p class="legendp">There is no data</p>
+                <td class="legend_p_td">
+                    <table class="legend_p_table">
+                        <tr class="legend_p_tr">
+                            <td style="width: 100%"><p class="legend_p">There is water</p></td>
+                        </tr>
+                        <tr class="legend_p_tr">
+                            <td><p class="legend_p">There is no water</p></td>
+                        </tr>
+                        <tr class="legend_p_tr">
+                            <td><p class="legend_p">There is no data</p></td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </table>
